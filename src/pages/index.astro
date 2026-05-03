@@ -1,17 +1,46 @@
 ---
-
+import MainLayout from '../layouts/MainLayout.astro';
+const allPosts = await Astro.glob('./*.md');
+const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout 
+	title="AI Decoder | Latest AI Guides & Reviews" 
+	description="Discover the latest in Artificial Intelligence, from tools like Mythos AI to deep dives into Llama 3 and GPT-5.">
+	
+	<p style="color: #666; margin-bottom: 2rem;">Explore our latest technical guides and AI industry insights.</p>
+
+	<div class="post-list">
+		{sortedPosts.map(post => (
+			<a href={post.url} class="post-card">
+				<div class="post-content">
+					<h2>{post.frontmatter.title}</h2>
+					<p>{post.frontmatter.description}</p>
+					<span class="read-more">Read Guide →</span>
+				</div>
+			</a>
+		))}
+	</div>
+
+	<style>
+		.post-list { display: grid; gap: 2rem; }
+		.post-card { 
+			display: block; 
+			text-decoration: none; 
+			color: inherit; 
+			padding: 1.5rem; 
+			border: 1px solid #eee; 
+			border-radius: 12px; 
+			transition: all 0.2s ease;
+			background: white;
+		}
+		.post-card:hover { 
+			border-color: #0070f3; 
+			transform: translateY(-2px); 
+			box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+		}
+		h2 { margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #111; }
+		p { margin: 0 0 1rem 0; color: #444; font-size: 1rem; }
+		.read-more { color: #0070f3; font-weight: bold; font-size: 0.9rem; }
+	</style>
+</MainLayout>
