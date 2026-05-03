@@ -1,0 +1,29 @@
+---
+const { title, description } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | AI Decoder</title>
+    <meta name="description" content={description} />
+    <style>
+      body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 2rem; color: #1a1a1a; background: #fafafa; }
+      nav { margin-bottom: 3rem; border-bottom: 1px solid #eee; padding: 1rem 0; }
+      nav a { font-weight: bold; text-decoration: none; color: #0070f3; font-size: 1.2rem; }
+      article { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+      h1 { font-size: 2.5rem; letter-spacing: -0.05em; margin-top: 0; }
+      .content { font-size: 1.1rem; color: #333; }
+      table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+      th, td { border: 1px solid #dfe1e5; padding: 12px; text-align: left; }
+      th { background: #f8f9fa; }
+    </style>
+  </head>
+  <body>
+    <nav><a href="/">AI DECODER.</a></nav>
+    <article>
+      <h1>{title}</h1>
+      <div class="content"><slot /></div>
+    </article>
+  </body>
+</html>
