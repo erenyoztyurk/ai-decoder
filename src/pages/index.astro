@@ -1,7 +1,16 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-const allPosts = await Astro.glob('./*.md');
-const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+
+// Astro.glob yerine Vite'ın daha sağlam olan import.meta.glob yöntemini kullanıyoruz
+const posts = import.meta.glob('./*.md', { eager: true });
+const allPosts = Object.values(posts);
+
+// Tarihe göre sıralama (Frontmatter içinde date yoksa hata vermemesi için korumalı)
+const sortedPosts = allPosts.sort((a, b) => {
+  const dateA = new Date(a.frontmatter.date || 0).getTime();
+  const dateB = new Date(b.frontmatter.date || 0).getTime();
+  return dateB - dateA;
+});
 ---
 
 <MainLayout 
@@ -31,16 +40,16 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.date).getTime
 			padding: 1.5rem; 
 			border: 1px solid #eee; 
 			border-radius: 12px; 
-			transition: all 0.2s ease;
+			transition: all 0.3s ease;
 			background: white;
 		}
 		.post-card:hover { 
 			border-color: #0070f3; 
-			transform: translateY(-2px); 
-			box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+			transform: translateY(-3px); 
+			box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
 		}
-		h2 { margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #111; }
-		p { margin: 0 0 1rem 0; color: #444; font-size: 1rem; }
-		.read-more { color: #0070f3; font-weight: bold; font-size: 0.9rem; }
+		h2 { margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #111; line-height: 1.2; }
+		p { margin: 0 0 1.2rem 0; color: #444; font-size: 1rem; line-height: 1.5; }
+		.read-more { color: #0070f3; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
 	</style>
 </MainLayout>
