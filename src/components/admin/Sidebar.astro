@@ -1,0 +1,113 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+
+const menuGroups = [
+  {
+    title: "OPERASYON",
+    items: [
+      { name: "Dashboard", href: "/admin/dashboard", icon: "layout-dashboard" },
+      { name: "Bot Kontrolü", href: "/admin/bot-control", icon: "bot" },
+      { name: "Toplu İçerik", href: "/admin/content-gen", icon: "layers" },
+      { name: "Zamanlayıcı", href: "/admin/scheduler", icon: "calendar-clock" },
+      { name: "Medya Kütüphanesi", href: "/admin/media", icon: "image" },
+    ]
+  },
+  {
+    title: "AI & OTOMASYON",
+    items: [
+      { name: "Görsel Otomasyonu", href: "/admin/ai-image", icon: "wand-2" },
+      { name: "AI Özetleyici", href: "/admin/ai-summary", icon: "file-text" },
+      { name: "Sözlük/Glossary", href: "/admin/glossary", icon: "book" },
+      { name: "Forum & Yorum Botu", href: "/admin/forum-bot", icon: "message-square" },
+      { name: "Fake Veri Simülatörü", href: "/admin/data-sim", icon: "database-zap" },
+    ]
+  },
+  {
+    title: "SEO MERKEZİ",
+    items: [
+      { name: "Meta Tag Yönetimi", href: "/admin/seo-meta", icon: "tags" },
+      { name: "Sitemap Dinamik", href: "/admin/seo-sitemap", icon: "map" },
+      { name: "Index Takipçisi", href: "/admin/seo-index", icon: "search-check" },
+      { name: "Kırık Link (404)", href: "/admin/seo-broken", icon: "link-2-off" },
+      { name: "İç Linkleme", href: "/admin/seo-linking", icon: "link" },
+      { name: "Robots.txt", href: "/admin/seo-robots", icon: "file-code" },
+      { name: "Keyword Trends", href: "/admin/seo-trends", icon: "trending-up" },
+    ]
+  },
+  {
+    title: "YÖNETİM & GÜVENLİK",
+    items: [
+      { name: "Canlı Tema", href: "/admin/theme", icon: "palette" },
+      { name: "Bileşen (Widget)", href: "/admin/widgets", icon: "puzzle" },
+      { name: "API Kasası", href: "/admin/api-vault", icon: "key-round" },
+      { name: "Git & Vercel", href: "/admin/git-deploy", icon: "github" },
+      { name: "Sistem Logları", href: "/admin/logs", icon: "terminal" },
+      { name: "Yedekleme", href: "/admin/backup", icon: "save" },
+      { name: "Bakım Modu", href: "/admin/maintenance", icon: "construction" },
+      { name: "Ayarlar", href: "/admin/settings", icon: "settings" },
+    ]
+  }
+];
+---
+
+<div class="flex flex-col h-full overflow-hidden">
+    <div class="flex items-center justify-between h-16 px-6 bg-slate-950">
+        <span class="text-xl font-bold tracking-wider text-indigo-400">ENGINE <span class="text-white">V1</span></span>
+        <button id="close-sidebar" class="lg:hidden text-slate-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-8 scrollbar-hide">
+        {menuGroups.map((group) => (
+            <div>
+                <h3 class="px-2 mb-4 text-xs font-semibold tracking-widest text-slate-500 uppercase">
+                    {group.title}
+                </h3>
+                <div class="space-y-1">
+                    {group.items.map((item) => {
+                        const isActive = pathname === item.href;
+                        return (
+                            <a
+                                href={item.href}
+                                class:list={[
+                                    "flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 group",
+                                    isActive 
+                                        ? "bg-indigo-600 text-white shadow-lg shadow-indigo-900/20" 
+                                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                                ]}
+                            >
+                                <span class="mr-3">
+                                    <svg class:list={["w-5 h-5", isActive ? "text-white" : "text-slate-500 group-hover:text-indigo-400"]} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <use href={`/assets/admin/icons.svg#${item.icon}`}></use>
+                                    </svg>
+                                </span>
+                                {item.name}
+                            </a>
+                        );
+                    })}
+                </div>
+            </div>
+        ))}
+    </nav>
+
+    <div class="p-4 border-t border-slate-800 bg-slate-900/50">
+        <div class="flex items-center p-2 rounded-xl bg-slate-800/50">
+            <div class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center text-xs font-bold text-white">SD</div>
+            <div class="ml-3 overflow-hidden">
+                <p class="text-xs font-medium text-white truncate">Senior Admin</p>
+                <p class="text-[10px] text-slate-500 truncate">Vercel Connected</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>

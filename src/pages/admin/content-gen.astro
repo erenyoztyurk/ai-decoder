@@ -1,0 +1,108 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const categories = ["Teknoloji", "Ekonomi", "Yaşam", "Sağlık", "Otomobil"];
+const languages = [
+  { code: "tr", name: "Türkçe" },
+  { code: "en", name: "İngilizce" },
+  { code: "de", name: "Almanca" }
+];
+---
+
+<AdminLayout title="Toplu İçerik Üretimi" description="AI destekli makale ve görsel otomasyonunu yapılandırın.">
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+    <div class="xl:col-span-2 space-y-6">
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-indigo-500"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
+            İçerik Yapılandırması
+        </h2>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Anahtar Kelimeler (Her satıra bir adet)</label>
+            <textarea 
+              rows="5" 
+              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-sm font-mono"
+              placeholder="Örn: Yapay Zeka Nedir?&#10;Python ile Bot Yapımı"
+            ></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori</label>
+              <select class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+                {categories.map(cat => <option value={cat}>{cat}</option>)}
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">Hedef Dil</label>
+              <select class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+                {languages.map(lang => <option value={code}>{lang.name}</option>)}
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-indigo-500"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            Görsel Otomasyon Ayarları (AI)
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                <input type="checkbox" id="gen-image" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                <label for="gen-image" class="text-sm font-medium text-slate-700">Kapak Görseli Üret</label>
+            </div>
+            <div class="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                <input type="checkbox" id="gen-alt" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                <label for="gen-alt" class="text-sm font-medium text-slate-700">Alt Tag Optimizasyonu</label>
+            </div>
+            <div class="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                <input type="checkbox" id="auto-webp" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                <label for="auto-webp" class="text-sm font-medium text-slate-700">WebP Dönüştürücü</label>
+            </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-6">
+      <section class="bg-slate-900 rounded-2xl p-6 text-white shadow-lg">
+        <h2 class="text-lg font-bold mb-4">Üretim Özeti</h2>
+        <div class="space-y-3 mb-8">
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-400">Beklenen Makale:</span>
+                <span class="font-mono font-bold text-indigo-400">0</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-400">AI Model:</span>
+                <span class="font-bold uppercase">GPT-4 Turbo</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-slate-400">Görsel Model:</span>
+                <span class="font-bold uppercase">DALL-E 3</span>
+            </div>
+        </div>
+        <button class="w-full bg-indigo-600 hover:bg-indigo-700 py-4 rounded-xl font-bold transition-all shadow-lg shadow-indigo-900/40 active:scale-95 flex items-center justify-center text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            ÜRETİMİ BAŞLAT
+        </button>
+      </section>
+
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <h2 class="font-bold text-slate-800 mb-4 tracking-tight uppercase text-xs">SEO & Linkleme</h2>
+        <div class="space-y-3">
+            <div class="flex items-center justify-between text-sm border-b border-slate-50 pb-2">
+                <span class="text-slate-500 italic">Otomatik İç Linkleme</span>
+                <div class="w-10 h-5 bg-indigo-100 rounded-full relative"><div class="absolute right-1 top-1 w-3 h-3 bg-indigo-600 rounded-full"></div></div>
+            </div>
+            <div class="flex items-center justify-between text-sm border-b border-slate-50 pb-2">
+                <span class="text-slate-500 italic">TL;DR Özet (Meta)</span>
+                <div class="w-10 h-5 bg-indigo-100 rounded-full relative"><div class="absolute right-1 top-1 w-3 h-3 bg-indigo-600 rounded-full"></div></div>
+            </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</AdminLayout> 

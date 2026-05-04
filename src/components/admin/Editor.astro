@@ -1,0 +1,107 @@
+<div class="flex flex-col border border-slate-200 rounded-2xl bg-white shadow-sm overflow-hidden min-h-[500px]">
+    <div class="bg-slate-50 border-b border-slate-200 p-2 flex flex-wrap items-center gap-1">
+        <div class="flex items-center space-x-1 pr-2 border-r border-slate-300 mr-1">
+            <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-600 transition-all active:scale-95" title="Kalın">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
+            </button>
+            <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-600 transition-all active:scale-95" title="İtalik">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+            </button>
+        </div>
+
+        <div class="flex items-center space-x-1 pr-2 border-r border-slate-300 mr-1">
+            <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-600 transition-all" title="Başlık 1">
+                <span class="text-sm font-black">H1</span>
+            </button>
+            <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-600 transition-all" title="Başlık 2">
+                <span class="text-sm font-black">H2</span>
+            </button>
+        </div>
+
+        <div class="flex items-center space-x-1 pr-2 border-r border-slate-300 mr-1">
+            <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-600 transition-all" title="Liste">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+            </button>
+            <button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-600 transition-all" title="Bağlantı">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <div class="flex items-center space-x-2">
+            <button class="flex items-center space-x-1 px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-bold hover:bg-indigo-100 transition-all" id="ai-optimize-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                <span>AI OPTİMİZE ET</span>
+            </button>
+            <button class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-all shadow-sm" id="save-content-btn">
+                KAYDET
+            </button>
+        </div>
+    </div>
+
+    <div class="flex-1 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-slate-200">
+        <textarea 
+            id="main-editor"
+            class="flex-1 p-6 outline-none resize-none font-mono text-sm text-slate-700 bg-transparent placeholder:text-slate-300 leading-relaxed min-h-[300px]"
+            placeholder="İçeriğinizi buraya yazın veya AI motorunu kullanarak oluşturun..."
+        ></textarea>
+        
+        <div class="flex-1 bg-slate-50/30 p-6 overflow-y-auto hidden md:block max-h-[calc(100vh-300px)]">
+            <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">CANLI ÖNİZLEME</div>
+            <article id="preview-area" class="prose prose-slate prose-sm max-w-none">
+                <span class="text-slate-300 italic italic text-xs">Yazmaya başladığınızda önizleme burada görünecektir.</span>
+            </article>
+        </div>
+    </div>
+
+    <div class="bg-slate-50 border-t border-slate-200 px-4 py-2 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-tight">
+        <div class="flex space-x-4">
+            <span>Kelimeler: <span id="word-count" class="text-slate-800">0</span></span>
+            <span>Okuma Süresi: <span id="read-time" class="text-slate-800">0 dk</span></span>
+        </div>
+        <div class="flex items-center">
+            <span class="flex items-center text-emerald-600">
+                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5 animate-pulse"></span>
+                OTOMATİK KAYIT AKTİF
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const editor = document.getElementById('main-editor') as HTMLTextAreaElement;
+    const preview = document.getElementById('preview-area') as HTMLElement;
+    const wordCount = document.getElementById('word-count') as HTMLElement;
+    const readTime = document.getElementById('read-time') as HTMLElement;
+
+    if (editor) {
+        editor.addEventListener('input', () => {
+            const content = editor.value;
+            
+            if (content.trim() === '') {
+                preview.innerHTML = '<span class="text-slate-300 italic italic text-xs">Yazmaya başladığınızda önizleme burada görünecektir.</span>';
+            } else {
+                preview.innerHTML = content.replace(/\n/g, '<br>');
+            }
+
+            const words = content.trim().split(/\s+/).filter(w => w.length > 0).length;
+            wordCount.innerText = words.toString();
+            readTime.innerText = Math.ceil(words / 200).toString() + ' dk';
+            
+            localStorage.setItem('engine_draft_content', content);
+        });
+
+        const saved = localStorage.getItem('engine_draft_content');
+        if (saved) {
+            editor.value = saved;
+            editor.dispatchEvent(new Event('input'));
+        }
+    }
+</script>
+
+<style is:global>
+    .prose h1 { @apply text-2xl font-black text-slate-900 mb-4; }
+    .prose h2 { @apply text-xl font-bold text-slate-800 mt-6 mb-3; }
+    .prose p { @apply mb-4 text-slate-600 leading-relaxed; }
+</style> 

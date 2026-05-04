@@ -1,0 +1,139 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const stats = [
+  { label: "Toplam İçerik", value: "1,284", change: "+12%", trend: "up", color: "blue" },
+  { label: "Aktif Botlar", value: "8/12", change: "Stabil", trend: "neutral", color: "indigo" },
+  { label: "Index Oranı", value: "%94", change: "+3%", trend: "up", color: "emerald" },
+  { label: "Trend Yakalama", value: "42", change: "+5", trend: "up", color: "amber" }
+];
+
+const quickActions = [
+  { name: "Toplu İçerik Üret", icon: "layers", href: "/admin/content-gen" },
+  { name: "Botları Tetikle", icon: "zap", href: "/admin/bot-control" },
+  { name: "Yeni Görsel Oluştur", icon: "wand-2", href: "/admin/ai-image" },
+  { name: "Sistem Yedeği Al", icon: "save", href: "/admin/backup" }
+];
+
+const recentLogs = [
+  { action: "Makale Yayınlandı", target: "AI Geleceği", time: "2 dk önce", status: "success" },
+  { action: "Görsel Üretildi", target: "Banner_01.webp", time: "15 dk önce", status: "success" },
+  { action: "Index Kontrolü", target: "Google Search Console", time: "1 saat önce", status: "warning" },
+  { action: "Yorum Botu Çalıştı", target: "Teknoloji Forumu", time: "3 saat önce", status: "success" }
+];
+---
+
+<AdminLayout title="Dashboard" description="Sistem genel durumu ve hızlı operasyon merkezi.">
+  <div class="space-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {stats.map((stat) => (
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm font-medium text-slate-500">{stat.label}</span>
+            <span class:list={[
+              "text-xs px-2 py-1 rounded-full font-semibold",
+              stat.trend === "up" ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-700"
+            ]}>
+              {stat.change}
+            </span>
+          </div>
+          <div class="text-3xl font-bold text-slate-900">{stat.value}</div>
+          <div class={`h-1 w-full bg-slate-100 mt-4 rounded-full overflow-hidden`}>
+            <div class={`h-full bg-${stat.color}-500 w-2/3`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-6">
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="font-bold text-slate-800 tracking-tight text-lg">Sistem Aktivite Logları</h2>
+            <a href="/admin/logs" class="text-xs text-indigo-600 font-semibold hover:underline">Tümünü Gör</a>
+          </div>
+          <div class="divide-y divide-slate-50">
+            {recentLogs.map((log) => (
+              <div class="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                <div class="flex items-center space-x-4">
+                  <div class:list={[
+                    "w-2 h-2 rounded-full",
+                    log.status === "success" ? "bg-emerald-500" : "bg-amber-500"
+                  ]}></div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-700">{log.action}</p>
+                    <p class="text-xs text-slate-400">{log.target}</p>
+                  </div>
+                </div>
+                <span class="text-xs text-slate-400 tabular-nums">{log.time}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-slate-900 rounded-2xl p-6 text-white overflow-hidden relative group">
+            <div class="relative z-10">
+              <h3 class="text-lg font-bold mb-2">Vercel Entegrasyonu</h3>
+              <p class="text-slate-400 text-sm mb-4">Otomatik Git deployment ve sunucu durumu aktif.</p>
+              <div class="flex items-center space-x-2 text-emerald-400 text-xs font-mono">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span>PRODUCTION: ONLINE</span>
+              </div>
+            </div>
+            <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-6 6H2l6-6"/><path d="m22 10-6-6H2l6 6"/></svg>
+            </div>
+          </div>
+
+          <div class="bg-indigo-600 rounded-2xl p-6 text-white overflow-hidden relative group">
+            <div class="relative z-10">
+              <h3 class="text-lg font-bold mb-2">AI Kapak Üretimi</h3>
+              <p class="text-indigo-100 text-sm mb-4">DALL-E 3 API üzerinden görsel otomasyonu hazır.</p>
+              <button class="bg-white text-indigo-600 px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-50 transition-colors">
+                Görsel Motorunu Yönet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="space-y-6">
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+          <h2 class="font-bold text-slate-800 mb-6 text-lg tracking-tight">Hızlı İşlemler</h2>
+          <div class="grid grid-cols-1 gap-3">
+            {quickActions.map((action) => (
+              <a 
+                href={action.href}
+                class="flex items-center p-3 rounded-xl border border-slate-100 hover:border-indigo-200 hover:bg-indigo-50 transition-all group"
+              >
+                <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center group-hover:bg-white transition-colors">
+                  <svg class="w-5 h-5 text-slate-500 group-hover:text-indigo-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <use href={`/assets/admin/icons.svg#${action.icon}`}></use>
+                  </svg>
+                </div>
+                <span class="ml-3 text-sm font-semibold text-slate-600 group-hover:text-slate-900">{action.name}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 text-white shadow-xl shadow-slate-200">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-bold text-lg">API Kasası</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">Şu an 5 farklı servisin (OpenAI, Google, Vercel, Cloudflare, Midjourney) anahtarları güvenli şekilde korunuyor.</p>
+          <div class="flex -space-x-2">
+            {[1,2,3,4,5].map(() => (
+              <div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-700 flex items-center justify-center text-[10px] font-bold tracking-tighter italic">Key</div>
+            ))}
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</AdminLayout> 
